@@ -3,14 +3,13 @@ import { Link, useParams } from 'react-router';
 import UseAuth from '../../Hooks/UseAuth';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { FaLinkedin, FaGithub, FaFileAlt, FaArrowLeft } from 'react-icons/fa';
 
 const JobApply = () => {
 
     const { id: jobId } = useParams();
-    console.log(jobId);
 
     const { user } = UseAuth();
-    console.log(jobId, user);
 
     const handleApplyFormSubmit = e => {
         e.preventDefault();
@@ -18,7 +17,6 @@ const JobApply = () => {
         const linkedIn = form.linkedIn.value;
         const gitHub = form.gitHub.value;
         const resume = form.resume.value;
-        console.log(linkedIn, gitHub, resume);
         const application = {
             jobId,
             applicant: user.email,
@@ -28,7 +26,6 @@ const JobApply = () => {
         }
         axios.post('http://localhost:5000/applications', application)
             .then(res => {
-                console.log(res.data)
                 if (res.data.insertedId) {
                     Swal.fire({
                         position: "top-end",
@@ -44,20 +41,61 @@ const JobApply = () => {
     }
 
     return (
-        <div className='text-center my-5 md:my-15'>
-            <h1 className='text-2xl my-5'>Apply for this Job: <Link className='text-blue-500' to={`/jobs/${jobId}`}>Details</Link></h1>
-            <form onSubmit={handleApplyFormSubmit}>
-                <label className="label">LinkedIn</label><br />
-                <input type="text" name='linkedIn' className="input" placeholder="Your LinkedIn Link" /><br /><br />
-
-                <label className="label">GitHub</label><br />
-                <input type="text" name='gitHub' className="input" placeholder="Your GitHub Link" /><br /><br />
-
-                <label className="label">Resume</label><br />
-                <input type="text" name='resume' className="input" placeholder="Your Resume Link" /><br /><br />
-
-                <input type="submit" className='btn' value="Submit" />
-            </form>
+        <div className="min-h-screen flex items-center justify-center py-10">
+            <div className="w-full max-w-lg bg-base-100 shadow-2xl rounded-2xl p-8 border border-base-200">
+                <div className="flex items-center justify-between mb-6">
+                    <h1 className="text-3xl font-bold text-primary flex items-center gap-2">
+                        <FaFileAlt className="text-accent" /> Apply for this Job
+                    </h1>
+                    <Link to={`/jobs/${jobId}`} className="text-blue-500 flex items-center gap-1 hover:underline text-base">
+                        <FaArrowLeft /> Details
+                    </Link>
+                </div>
+                <form onSubmit={handleApplyFormSubmit} className="space-y-5">
+                    <div>
+                        <label className="label font-semibold flex items-center gap-2">
+                            <FaLinkedin className="text-blue-700" /> LinkedIn
+                        </label>
+                        <input
+                            type="text"
+                            name="linkedIn"
+                            className="input input-bordered w-full"
+                            placeholder="Your LinkedIn Profile Link"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="label font-semibold flex items-center gap-2">
+                            <FaGithub className="text-gray-800" /> GitHub
+                        </label>
+                        <input
+                            type="text"
+                            name="gitHub"
+                            className="input input-bordered w-full"
+                            placeholder="Your GitHub Profile Link"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="label font-semibold flex items-center gap-2">
+                            <FaFileAlt className="text-accent" /> Resume
+                        </label>
+                        <input
+                            type="text"
+                            name="resume"
+                            className="input input-bordered w-full"
+                            placeholder="Your Resume Link"
+                            required
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="btn btn-primary btn-lg w-full mt-4 transition-transform duration-200 hover:scale-105 hover:shadow-lg"
+                    >
+                        Submit Application
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

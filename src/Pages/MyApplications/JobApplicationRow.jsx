@@ -9,7 +9,7 @@ const JobApplicationRow = ({application, index}) => {
             <tr>
                 <th>
                     <label>
-                        {index+1}
+                        { index + 1 }
                     </label>
                 </th>
                 <td>

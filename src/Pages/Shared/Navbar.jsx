@@ -7,13 +7,13 @@ const Navbar = () => {
 
     const { user, signOutUser } = use(AuthContext);
 
-    const handleSignOut = () =>{
+    const handleSignOut = () => {
         signOutUser(auth)
-    .then(() =>
-        console.log('user signed out'))
-        .catch(error=>{
-            console.log(error)
-        })
+            .then(() =>
+                console.log('user signed out'))
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     const links = <>
@@ -45,6 +45,81 @@ const Navbar = () => {
                     {links}
                 </ul>
             </div>
+
+            {/* theme controller started */}
+            <div className="dropdown ">
+                <div tabIndex={0} role="button" className="btn m-1">
+                    Theme
+                    <svg
+                        width="12px"
+                        height="12px"
+                        className="inline-block h-2 w-2 fill-current opacity-60"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 2048 2048">
+                        <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+                    </svg>
+                </div>
+                <ul tabIndex={0} className="dropdown-content bg-base-300 rounded-box z-1 w-52 p-2 shadow-2xl">
+                    <li>
+                        <input
+                            type="radio"
+                            name="theme-dropdown"
+                            className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
+                            aria-label="light"
+                            value="light" />
+                    </li>
+                    <li>
+                        <input
+                            type="radio"
+                            name="theme-dropdown"
+                            className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
+                            aria-label="dark"
+                            value="dark" />
+                    </li>
+                    <li>
+                        <input
+                            type="radio"
+                            name="theme-dropdown"
+                            className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
+                            aria-label="retro"
+                            value="retro" />
+                    </li>
+                    <li>
+                        <input
+                            type="radio"
+                            name="theme-dropdown"
+                            className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
+                            aria-label="Valentine"
+                            value="valentine" />
+                    </li>
+                    <li>
+                        <input
+                            type="radio"
+                            name="theme-dropdown"
+                            className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
+                            aria-label="Aqua"
+                            value="aqua" />
+                    </li>
+                    <li>
+                        <input
+                            type="radio"
+                            name="theme-dropdown"
+                            className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
+                            aria-label="cupcake"
+                            value="cupcake" />
+                    </li>
+                    <li>
+                        <input
+                            type="radio"
+                            name="theme-dropdown"
+                            className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
+                            aria-label="forest"
+                            value="forest" />
+                    </li>
+                </ul>
+            </div>
+            {/* theme controller ended */}
+
             <div className="navbar-end">
                 {
                     user ? <button className='btn' onClick={handleSignOut}>Sign Out</button> :
