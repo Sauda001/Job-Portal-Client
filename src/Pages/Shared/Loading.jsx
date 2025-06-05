@@ -2,7 +2,7 @@ import React from 'react';
 
 const Loading = () => {
     return (
-        <div className='max-w-screen mx-auto mt-10'>
+        <div className="flex items-center justify-center h-screen w-screen">
             <span className="loading loading-spinner text-success"></span>
         </div>
     );
